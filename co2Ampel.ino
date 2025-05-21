@@ -4,9 +4,9 @@
 #include <HardwareSerial.h>
 #include <string.h>
 
-const char* gSSID = "";
-const char* gPasswort = "";
-const char* gMQTT_Broker = "";
+const char* gSSID = "IphoneLeon";
+const char* gPasswort = "12345678";
+const char* gMQTT_Broker = "leonw.loseyourip.com";
 
 const int gPinLedGruen = 18;
 const int gPinLedGelb = 0;
@@ -24,8 +24,11 @@ HardwareSerial mySerial(1);  // UART1
 void setup_wifi() {
   WiFi.begin(gSSID, gPasswort);
   while(WiFi.status() != WL_CONNECTED) {
+    Serial.println("Versuche Wlan-Verbindung…");
+    zeigeFehler(gPinLedGruen);
     delay(500);
   }
+  Serial.print("Verbunden");
 }
 
 void reconnect() {
